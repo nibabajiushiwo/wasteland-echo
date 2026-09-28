@@ -1,0 +1,154 @@
+{
+  "ruleset": "wasteland-echo-v1.0",
+  "formulas": {
+    "outgoing_damage": "max(atk*mult*0.2, atk*mult - target_def*0.6)",
+    "incoming_damage": "max(raw*0.2, raw - def*0.6)",
+    "crit": "final*(1.5 + (crit_dmg - 1.5)) when crit; crit_rate hard cap 0.80",
+    "dps": "expected_hit * attacks_per_sec + skill_cycle_dps"
+  },
+  "level": {
+    "max": 60,
+    "exp_per_level": {"1-10": "60*L", "11-20": "130*L", "21-32": "220*L", "33-44": "360*L", "45-60": "520*L"},
+    "total_exp_1_to_60": 665330,
+    "free_points_per_level": 3,
+    "point_effects": {"hp": 12, "atk": 1.5, "def": 3, "crit_rate": 0.0025}
+  },
+  "classes": {
+    "assassin": {"hp0": 480, "atk0": 62, "def0": 38, "hp_growth": 38, "atk_growth": 5.0, "def_growth": 3.0, "aspd": 1.8, "mspd": 6.5, "crit": 0.15, "crit_dmg": 1.8, "resource": "energy100"},
+    "guard":   {"hp0": 860, "atk0": 46, "def0": 96, "hp_growth": 72, "atk_growth": 4.6, "def_growth": 7.6, "aspd": 0.9, "mspd": 4.2, "crit": 0.05, "crit_dmg": 1.5, "resource": "none"},
+    "warlock": {"hp0": 560, "atk0": 58, "def0": 46, "hp_growth": 42, "atk_growth": 4.6, "def_growth": 3.6, "aspd": 0.8, "mspd": 5.0, "crit": 0.08, "crit_dmg": 1.6, "resource": "mana100"},
+    "gunner":  {"hp0": 520, "atk0": 52, "def0": 44, "hp_growth": 40, "atk_growth": 4.1, "def_growth": 3.4, "aspd": 2.5, "mspd": 5.5, "crit": 0.12, "crit_dmg": 1.7, "resource": "none"}
+  },
+  "weapons": {
+    "assassin": {"atk0": 30, "atk_growth": 10, "sub": {"crit_rate": 0.006}},
+    "guard":   {"atk0": 28, "atk_growth": 9,  "sub": {"def": 2}},
+    "warlock": {"atk0": 28, "atk_growth": 9,  "sub": {"mana_cap": 1}},
+    "gunner":  {"atk0": 26, "atk_growth": 8.5, "sub": {"aspd_mult": 0.003}}
+  },
+  "weapon_upgrade": {
+    "max_level": 20,
+    "crystal_cost": "8*w^1.5",
+    "coin_cost": "100*w",
+    "total_crystal": 5373,
+    "breakthrough": {"5": "workshop3+digger_blueprint", "10": "workshop5+rock_blueprint", "15": "workshop8+thousand_vine_blueprint", "20": "workshop10+iron_tomb_blueprint"},
+    "level_cap_rule": "workshop_level*2"
+  },
+  "gear": {
+    "quality_mult": {"white": 1.0, "green": 1.15, "blue": 1.35, "purple": 1.6, "orange": 1.9},
+    "sub_mult": {"white": 1.0, "green": 1.1, "blue": 1.25, "purple": 1.45, "orange": 1.7},
+    "armor":  {"hp": "40+6L", "def": "8+1.5L"},
+    "helmet": {"hp": "20+3L", "crit_rate_pct": "1+0.08L"},
+    "gloves": {"atk": "6+1.2L", "aspd_pct": "0.2L"},
+    "boots":  {"def": "4+0.8L", "mspd_pct": "0.3L"},
+    "trinket":{"atk": "4+1.0L", "crit_dmg_pct": "1+0.1L"}
+  },
+  "bunker": {
+    "max_level": 10,
+    "region_gates": {"region1": 1, "region2": 3, "region3": 6, "region4": 8, "region5": 10},
+    "facility_cost_crystal": "40*w^1.5",
+    "facility_cost_coin": "300*w",
+    "workshop_total_crystal": 4442,
+    "tech_nodes": 6,
+    "tech_levels": 5,
+    "tech_cost_sample": "12*n^1.5",
+    "tech_total_sample": 2028
+  },
+  "currencies": {
+    "crystal": "elite 8-15, boss 60-120, node 20-40, defense 300; sink weapon 5373 + workshop 4442 + defense ~2000",
+    "sample": "node 5-15, elite rare, weekly 120; sink tech 2028",
+    "blueprint": "region bosses x4; sink weapon breakthrough + facility cap",
+    "fuel": "energy station 1/h; spend 5 per trip + 1 per 3min; cap 20",
+    "coin": "kills, quests, greenhouse, sell"
+  },
+  "party_scale": {"1": 0.35, "2": 0.6, "3": 0.8, "4": 1.0},
+  "monsters": {
+    "counts": {"trash": 31, "elites": 15, "bosses": 6, "total": 52},
+    "clone_rule": "爬行者死亡后无条件克隆1次, 克隆体死亡继续克隆(同屏上限12只, 60秒自灭); 克隆体0经验0掉落; 术士击杀不触发克隆; 本体掉落废土币15 + 8%概率结晶1",
+    "ambush_rule": "潜伏者为区域2野外遭遇型可选Boss(非主线, 每局最多1次); 不掉蓝图(蓝图仅主线区域Boss); 攻击命中施加'残蚀': 全属性-10%(攻/防/攻速/移速)持续1秒可刷新(攻速1.8→攻击间隔0.56s<1s→等效常驻); 掉落结晶60-120 + 概率紫装 + 专属材料'潜伏者肉膜'",
+    "zone1": [
+      {"name": "爬行者", "lv": 1, "hp": 70, "atk": 35, "def": 3, "aspd": 1.0, "mspd": 6.8, "exp": 15, "note": "克隆: 死亡无条件克隆1次, 术士击杀不克隆; 克隆体无经验无掉落"},
+      {"name": "畸变犬", "lv": 2, "hp": 170, "atk": 55, "def": 6, "aspd": 1.5, "mspd": 5.8, "exp": 28},
+      {"name": "畸变鼠群", "lv": 2, "hp": 90, "atk": 40, "def": 4, "aspd": 2.0, "mspd": 6.0, "exp": 22},
+      {"name": "缠根藤蔓", "lv": 3, "hp": 300, "atk": 60, "def": 12, "aspd": 0.7, "mspd": 0, "exp": 35},
+      {"name": "畸变秃鹫", "lv": 4, "hp": 200, "atk": 65, "def": 8, "aspd": 1.0, "mspd": 7.5, "exp": 40},
+      {"name": "辐射孢菇", "lv": 5, "hp": 380, "atk": 45, "def": 10, "aspd": 0.5, "mspd": 1.2, "exp": 55},
+      {"name": "掠夺者拾荒者", "lv": 7, "hp": 520, "atk": 75, "def": 18, "aspd": 1.1, "mspd": 5.0, "exp": 70}
+    ],
+    "zone2": [
+      {"name": "辐射野狼", "lv": 12, "hp": 1800, "atk": 95, "def": 25, "aspd": 1.4, "mspd": 6.0, "exp": 150},
+      {"name": "酸液食人花", "lv": 13, "hp": 1500, "atk": 90, "def": 28, "aspd": 0.6, "mspd": 0.8, "exp": 140},
+      {"name": "辐射野猪", "lv": 14, "hp": 2600, "atk": 100, "def": 32, "aspd": 0.9, "mspd": 5.4, "exp": 180},
+      {"name": "腐鸦群", "lv": 15, "hp": 1200, "atk": 80, "def": 30, "aspd": 1.2, "mspd": 7.0, "exp": 160},
+      {"name": "掠夺者枪手", "lv": 16, "hp": 1600, "atk": 110, "def": 36, "aspd": 1.0, "mspd": 4.6, "exp": 240},
+      {"name": "掠夺者斧兵", "lv": 17, "hp": 2200, "atk": 105, "def": 40, "aspd": 1.0, "mspd": 4.4, "exp": 260}
+    ],
+    "zone3": [
+      {"name": "蛛化工虫", "lv": 22, "hp": 3600, "atk": 130, "def": 100, "aspd": 1.8, "mspd": 6.4, "exp": 550},
+      {"name": "巨型蚊蝇", "lv": 23, "hp": 3000, "atk": 120, "def": 105, "aspd": 1.4, "mspd": 6.8, "exp": 520},
+      {"name": "孢菇喷吐者", "lv": 24, "hp": 2800, "atk": 115, "def": 110, "aspd": 0.5, "mspd": 1.0, "exp": 500},
+      {"name": "藤蔓树人", "lv": 26, "hp": 5200, "atk": 140, "def": 118, "aspd": 0.8, "mspd": 3.2, "exp": 700},
+      {"name": "螳螂刀手", "lv": 27, "hp": 3400, "atk": 135, "def": 122, "aspd": 2.0, "mspd": 6.6, "exp": 620},
+      {"name": "毒囊甲虫", "lv": 28, "hp": 2200, "atk": 110, "def": 126, "aspd": 0.6, "mspd": 4.6, "exp": 480}
+    ],
+    "zone4": [
+      {"name": "畸变拾荒者", "lv": 34, "hp": 4300, "atk": 175, "def": 170, "aspd": 1.2, "mspd": 5.0, "exp": 1500},
+      {"name": "收割机魔像", "lv": 35, "hp": 5000, "atk": 180, "def": 175, "aspd": 1.0, "mspd": 4.2, "exp": 1700},
+      {"name": "猎犬机械体", "lv": 36, "hp": 3800, "atk": 170, "def": 180, "aspd": 1.8, "mspd": 6.2, "exp": 1450},
+      {"name": "狙击畸变体", "lv": 37, "hp": 3200, "atk": 200, "def": 185, "aspd": 0.5, "mspd": 4.0, "exp": 2200},
+      {"name": "喷火畸变体", "lv": 38, "hp": 4500, "atk": 150, "def": 190, "aspd": 0.7, "mspd": 4.4, "exp": 1800},
+      {"name": "巨锤畸变体", "lv": 40, "hp": 6500, "atk": 190, "def": 198, "aspd": 0.8, "mspd": 4.0, "exp": 1900}
+    ],
+    "zone5": [
+      {"name": "育魔幼体", "lv": 46, "hp": 5600, "atk": 220, "def": 250, "aspd": 1.9, "mspd": 6.8, "exp": 3400},
+      {"name": "畸变卵囊", "lv": 47, "hp": 4200, "atk": 0, "def": 255, "aspd": 0, "mspd": 0, "exp": 3000},
+      {"name": "血蛭触手", "lv": 48, "hp": 5000, "atk": 210, "def": 258, "aspd": 1.1, "mspd": 4.6, "exp": 3200},
+      {"name": "魔使术士", "lv": 50, "hp": 4800, "atk": 240, "def": 265, "aspd": 0.6, "mspd": 4.4, "exp": 4200},
+      {"name": "育魔侍卫", "lv": 52, "hp": 7000, "atk": 230, "def": 272, "aspd": 0.9, "mspd": 4.2, "exp": 4400},
+      {"name": "腐化孢子兽", "lv": 54, "hp": 6000, "atk": 200, "def": 280, "aspd": 0.7, "mspd": 4.8, "exp": 3800}
+    ],
+    "elites": [
+      {"name": "裂齿", "lv": 6, "hp4": 18400, "atk": 65, "def": 30, "exp": 350},
+      {"name": "百足", "lv": 8, "hp4": 18400, "atk": 70, "def": 34, "exp": 420},
+      {"name": "断手", "lv": 9, "hp4": 18400, "atk": 75, "def": 40, "exp": 500},
+      {"name": "灰喉", "lv": 17, "hp4": 26000, "atk": 120, "def": 60, "exp": 900},
+      {"name": "毒针", "lv": 19, "hp4": 26000, "atk": 115, "def": 66, "exp": 1000},
+      {"name": "刽子手", "lv": 19, "hp4": 26000, "atk": 125, "def": 70, "exp": 1100},
+      {"name": "织网者", "lv": 29, "hp4": 35000, "atk": 160, "def": 128, "exp": 2200},
+      {"name": "朽根", "lv": 30, "hp4": 35000, "atk": 165, "def": 132, "exp": 2400},
+      {"name": "镰月", "lv": 31, "hp4": 35000, "atk": 170, "def": 136, "exp": 2600},
+      {"name": "绞盘", "lv": 41, "hp4": 44000, "atk": 230, "def": 205, "exp": 5200},
+      {"name": "锈眼", "lv": 42, "hp4": 44000, "atk": 235, "def": 210, "exp": 5600},
+      {"name": "炮垒", "lv": 43, "hp4": 44000, "atk": 240, "def": 215, "exp": 6000},
+      {"name": "角卫", "lv": 55, "hp4": 56000, "atk": 280, "def": 285, "exp": 12000},
+      {"name": "低语者", "lv": 56, "hp4": 56000, "atk": 285, "def": 290, "exp": 13000},
+      {"name": "腐化兽王", "lv": 57, "hp4": 56000, "atk": 290, "def": 295, "exp": 14000}
+    ],
+    "bosses": [
+      {"name": "掘地者", "lv": 10, "hp4": 98000, "atk": 130, "def": 50, "exp": 2000, "phase_note": "钻地突袭x2.5 / 甩尾x1.5 / 泥浆减速"},
+      {"name": "磐岩", "lv": 20, "hp4": 200000, "atk": 200, "def": 70, "exp": 6000, "phase_note": "冲撞x3.0 / 拍击x1.8 / 召唤幼熊"},
+      {"name": "潜伏者", "lv": 18, "hp4": 120000, "atk": 225, "def": 55, "exp": 7500, "phase_note": "可选野外Boss(非主线/不掉蓝图). 普攻二连0.8x2 / 扑袭x2.8(前摇0.6s红线) / 命中施加'残蚀'全属性-10% 1s可刷新(等效常驻)"},
+      {"name": "千须", "lv": 32, "hp4": 410000, "atk": 260, "def": 130, "exp": 16000, "phase_note": "藤鞭x1.8 / 根须穿刺x2.8 / 召唤藤蔓"},
+      {"name": "铁墓", "lv": 44, "hp4": 845000, "atk": 330, "def": 220, "exp": 35000, "phase_note": "蓄力重炮x3.0 / 震荡波x1.6 / 导弹雨"},
+      {"name": "米尔瓦", "lv": 58, "hp4": 1200000, "atk": 420, "def": 290, "exp": 60000, "phase_note": "孵化压制x2.8 / 触手横扫x1.6 / 血蛭召唤"},
+      {"name": "阿克纳", "lv": 60, "hp4": 2350000, "atk": 520, "def": 300, "exp": 120000, "phase_note": "三阶段：育魔之巢/狂暴/残躯"}
+    ]
+  },
+  "regions": [
+    {"id": "region1", "name": "边缘废土", "levels": "1-10", "bunker_gate": 1, "radiation": 0.5},
+    {"id": "region2", "name": "辐射荒野", "levels": "11-20", "bunker_gate": 3, "radiation": 1.0},
+    {"id": "region3", "name": "畸变丛林", "levels": "21-32", "bunker_gate": 6, "radiation": 1.6},
+    {"id": "region4", "name": "钢铁坟场", "levels": "33-44", "bunker_gate": 8, "radiation": 2.4},
+    {"id": "region5", "name": "育魔巢穴", "levels": "45-60", "bunker_gate": 10, "radiation": 3.2}
+  ],
+  "balance_assertions": [
+    "Lv60 single-target DPS ratio vs gunner in [0.50,1.35]: assassin 1.20, guard 0.57, warlock 0.65, gunner 1.00",
+    "Guard EHP >= 2.2x assassin: 3.54x",
+    "Elite 4p TTK 14s in [12,20]s",
+    "Akkana baseline TTK 9.9min <= 10min, geared 6.8min in [5,10]min",
+    "Trash TTK: Z1 0.4s, Z2-Z5 3.2/4.5/4.2/4.2s",
+    "Crit rate hard cap 80%",
+    "Crawler TTK <=1s all classes; clones 0 exp/0 drop, cap 12 alive",
+    "Lurker HP 120k < 70% of Rock (200k); 4p TTK 65s in [60,120]s; guard blockable, assassin hits readable",
+    "Bestiary count: 31 trash + 15 elites + 6 bosses = 52"
+  ]
+}

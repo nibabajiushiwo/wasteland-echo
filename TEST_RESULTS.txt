@@ -1,0 +1,42 @@
+✔ damage floor and level 60 panels (198.478542ms)
+✔ XP curve and 177 attribute points (8.471625ms)
+✔ idempotent settlement and blueprint extraction (60.396875ms)
+✔ upgrade materials, facility caps and blueprint gates (1.305875ms)
+✔ crawler clone gives no rewards; warlock prevents cloning (15.203709ms)
+✔ clone lifetime and simultaneous cap (1.965667ms)
+✔ guard hold mitigates post-defense damage (13.6785ms)
+✔ warlock ray mana, piercing and cooldown (1.612625ms)
+✔ assassin burst requires and consumes 100 energy (1.066167ms)
+✔ dodge invulnerability and delayed boss warning (1.19375ms)
+✔ revival takes 2.5s and restores 40 percent (1.274583ms)
+✔ fuel forced evacuation and voluntary extraction hold (2.788792ms)
+✔ fuel regeneration and cap (0.514125ms)
+✔ radiation and purification towers (1.493958ms)
+✔ ore collection and boss spawn are idempotent (0.704708ms)
+✔ radiation is individual and medical tier reduces death loss (5.626459ms)
+✔ dodge prevents boss slow as well as damage (1.361ms)
+✔ control mode supports auto detection and persistent overrides (284.294625ms)
+✔ movement and attack pointers release independently, including cancellation (68.423125ms)
+✔ joystick has a deadzone and normalized diagonal motion (32.659459ms)
+✔ bunker room walls block players but doors remain walkable (2.629042ms)
+✔ nearby stations require physical proximity and all facilities are present (0.370584ms)
+✔ stale bunker input stops movement and return places player at airlock (0.2375ms)
+  Live expedition and hub checkpoint survive restart; fuel and rewards are not applied twice.
+✔ server restart restores paused expedition, position, fuel and exactly-once rewards (8365.479708ms)
+✔ level 10 squad completes exploration, digger boss and blueprint extraction (2482.330833ms)
+✔ backup round trip preserves progress and excludes settlement IDs (15.61325ms)
+✔ invalid backup cannot inject impossible stats or nonfinite coordinates (0.804708ms)
+✔ status strip describes active buffs and debuffs with their durations (103.257042ms)
+✔ enemy heading tracks actual chase direction in all four quadrants (33.309584ms)
+  Physical stations, four-player shared hub, ready checks, stale-input rejection, reconnect, standby and persistence verified.
+✔ multiplayer hub, ready gate, scene isolation, migration, reconnect, standby joining and persistence (19907.349375ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20847.757417
+
+Frontend DOM smoke: PASS (Happy DOM; not real-device browser validation).
